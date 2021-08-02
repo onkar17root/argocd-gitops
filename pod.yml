@@ -10,3 +10,28 @@ spec:
   containers:
   - name: "mycon1"
     image: "httpd"
+    
+--------------
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    argocd.argoproj.io/instance: mywebapp
+    dc: IN
+    env: dev
+  name: mypod1
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    argocd.argoproj.io/instance: mywebapp
+    dc: IN
+    env: dev
+  type: NodePort
+status:
+  loadBalancer: {}
+
